@@ -137,7 +137,7 @@ Password: <password discovered from robots.txt>
 
 I supplied a username wordlist and started the attack.
 
-The responses came was interesting. Expect a single username, every other length were same
+The responses came was interesting. Expect a single username, every other code length were the same.
 
 ![alt text](image9.png)
 
