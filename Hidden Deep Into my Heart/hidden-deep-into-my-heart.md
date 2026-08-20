@@ -1,9 +1,6 @@
 # Hidden Deep Into My Heart
 
-**Platform:** TryHackMe
-**Difficulty:** Easy
-**Category:** Web
-**Target:** `http://10.48.173.180:5000`
+**Platform:** TryHackMe | **Difficulty:** Easy | **Category:** Web
 
 ---
 
