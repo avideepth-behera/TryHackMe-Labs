@@ -2,9 +2,11 @@
 
 Platform: TryHackMe | Level: Easy | Category: Web
 
+Link: https://tryhackme.com/room/picklerick
+
 ---
 
-## 1. Reconnaissance
+## Reconnaissance
 
 The assessment began with a `Nmap` scan to identify open ports and running services.
 
@@ -20,7 +22,7 @@ The web server was running on port **80** which is our primary attack surface.
 
 ---
 
-## 2. Directory Enumeration
+## Directory Enumeration
 
 To identify hidden files and directories, perform a directory brute-forcing using Gobuster.
 
@@ -36,7 +38,7 @@ The enumeration revealed several interesting resources, including a login page, 
 
 ---
 
-## 3. Credential Discovery
+## Credential Discovery
 
 I inspected the `index.html` source code and found a username:
 
@@ -50,7 +52,7 @@ Although `robots.txt` is intended for search engine crawlers, developers sometim
 
 ---
 
-## 4. Authentication
+## Authentication
 
 I tested the credentials found early to login into `login.php`:
 
@@ -79,7 +81,7 @@ This confirmed that we can execution arbitrary system command in the command fie
 
 ---
 
-## 5. Reverse Shell
+## Reverse Shell
 
 So I ran a reverse shell command in the command field:
 
@@ -99,7 +101,7 @@ We got the shell.
 
 ---
 
-## 6. Stable Shell
+## Stable Shell
 
 If you also find the shell is not stable, I would recommend you to upgrade a nc shell to a stable, interactive TTY shell using Python. Run these command in sequence:
 
@@ -123,9 +125,9 @@ export TERM=xterm-256color
 
 ---
 
-## 7. Find the Ingredients
+## Find the Ingredients
 
-### A. 1st Ingredient
+### 1st Ingredient
 
 Check the files in the directory.
 
@@ -147,7 +149,7 @@ This revealed the **first ingredient**.
 
 ---
 
-### B. 2nd Ingredient
+### 2nd Ingredient
 
 There is another interesting file `clue.txt` in the directory.
 
@@ -183,7 +185,7 @@ This revealed the **second ingredient**.
 
 ---
 
-# 8. Privilege Escalation
+# Privilege Escalation
 
 I couldn't find the last ingredient, so I thought let's check if we can gain the root access:
 
@@ -205,7 +207,7 @@ Gained the `root` access.
 
 ---
 
-### C. 3rd Ingredient
+### 3rd Ingredient
 
 After gaining root access I search for the last ingredient.
 
@@ -227,7 +229,7 @@ The contents revealed the **third ingredient**, completing the room.
 
 ---
 
-## 9. Root Cause Analysis
+## Root Cause
 
 The challenge intentionally combines several common security weaknesses:
 
@@ -240,7 +242,7 @@ While these weaknesses are designed for educational purposes, these mirror issue
 
 ---
 
-## 11. Security Impact
+## Security Impact
 
 If found in a production environment, these issues could allow an attacker to:
 
@@ -252,7 +254,7 @@ If found in a production environment, these issues could allow an attacker to:
 
 ---
 
-# 12. Mitigation
+# Mitigation
 
 Developers and system administrators should:
 
@@ -264,7 +266,7 @@ Developers and system administrators should:
 
 ---
 
-## 13. Key Takeaways
+## Key Takeaways
 
 * Always begin with thorough reconnaissance.
 * Enumerate hidden files such as `robots.txt` and inspect page source code.
@@ -274,48 +276,6 @@ Developers and system administrators should:
 
 ---
 
-## 14. Attack Chain
-
-```text
-Nmap Scan
-      │
-      ▼
-Directory Enumeration
-      │
-      ▼
-Source Code Inspection
-      │
-      ▼
-robots.txt Enumeration
-      │
-      ▼
-Credential Discovery
-      │
-      ▼
-Login to portal.php
-      │
-      ▼
-Command Execution
-      │
-      ▼
-Ingredient 1
-      │
-      ▼
-Filesystem Enumeration
-      │
-      ▼
-Ingredient 2
-      │
-      ▼
-sudo -l
-      │
-      ▼
-Privilege Escalation
-      │
-      ▼
-Ingredient 3 (Root)
-```
-
-## 15. Conclusion
+## Conclusion
 
 The **Pickle Rick** room provides a practical introduction to the methodology followed during web application and Linux security assessments. Rather than relying on complex exploits, the room demonstrates how systematic enumeration, information gathering, and basic privilege escalation techniques can be chained together to achieve complete compromise. It reinforces an important lesson for penetration testers: successful assessments often depend more on careful reconnaissance and logical progression than on advanced exploitation techniques.
