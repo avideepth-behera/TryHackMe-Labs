@@ -306,26 +306,3 @@ However, systematic enumeration revealed `robots.txt`, which exposed both a hidd
 After discovering the valid username, the administrator account could be accessed and the room flag retrieved.
 
 The key lesson is that **information disclosure, poor authentication controls, and hidden administrative endpoints can become significantly more dangerous when chained together.**
-
-
-
-
-![alt text](image2.png)
-
-![alt text](image3.png)
-
-ffuf -u http://10.48.173.180:5000/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -mc all -fc 404
-![alt text](image4.png)
-
-![alt text](image5.png)
-
-ffuf -u http://10.48.173.180:5000/cupids_secret_vault/FUZZ -w /usr/share/seclists/Discovery/Web-Content/common.txt -mc all -fc 404
-![alt text](image6.png)
-
-![alt text](image.png)
-
-![alt text](image-3.png)
-
-![alt text](image-4.png)
-
-![alt text](image-1.png)
