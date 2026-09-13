@@ -1,4 +1,4 @@
-# Pickle Rick
+# Signed Messages
 
 Platform: TryHackMe | Level: Medium | Category: Web
 
