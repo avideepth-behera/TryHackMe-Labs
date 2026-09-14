@@ -1,4 +1,4 @@
 # TryHackMe-Labs
-My version of Writeups for TryHackMe rooms.
+This is my writeups for the TryHackMe rooms.
 
 Wanna see my profile :) -> [Click Here](https://tryhackme.com/p/avideepth)
