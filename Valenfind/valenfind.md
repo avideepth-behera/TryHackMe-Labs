@@ -4,9 +4,11 @@
 **Difficulty:** Medium
 **Category:** Web
 
+Link: https://tryhackme.com/room/lafb2026e10
+
 ---
 
-## 1. Reconnaissance
+# Reconnaissance
 
 I started with an Nmap scan to identify open ports, services, and versions. Normal scan was blocking the scan, I modified with a No-Ping and used Port 53 (DNS) as DNS port will be allowed eventually.
 
@@ -28,7 +30,7 @@ http://10.49.179.227:5000
 
 ---
 
-## 2. Directory Enumeration
+# Directory Enumeration
 
 I then performed directory enumeration using `ffuf`:
 
@@ -53,7 +55,7 @@ I therefore moved on to manually inspecting the application's source code.
 
 ---
 
-## 3. Source Code Inspection
+# Source Code Inspection
 
 While inspecting the profile page, I found JavaScript responsible for dynamically loading the profile layout:
 
@@ -77,7 +79,7 @@ This suggested that the backend was dynamically reading a file based on the supp
 
 ---
 
-## 4. Path Traversal
+# Path Traversal
 
 I captured the request in **Burp Suite Repeater** and modified the `layout` parameter.
 
@@ -118,7 +120,7 @@ The application failed to properly restrict the requested file to the intended `
 
 ---
 
-## 5. Futher Enumeration
+# Futher Enumeration
 
 Since arbitrary file read was confirmed, I started looking for application source files and check the Website's Tech Stack.
 
@@ -165,7 +167,7 @@ cupid.db
 
 ---
 
-## 6. Discovering the Admin Endpoint
+# Discovering the Admin Endpoint
 
 While reviewing `app.py`, I found an administrative database export endpoint:
 
@@ -181,7 +183,7 @@ Since the API key had already been obtained from `app.py`, I could authenticate 
 
 ---
 
-## 7. Exporting the Database
+# Exporting the Database
 
 I crafted the following request in **Burp Suite Repeater**:
 
@@ -191,7 +193,7 @@ The server accepted the token and returned the SQLite database.
 
 ---
 
-## 8. Extracting the Flag
+# Extracting the Flag
 
 The database contained the application's user information and challenge-related data.
 
@@ -238,7 +240,7 @@ The flag was present in the database, allowing me to complete the room.
 
 ---
 
-# Vulnerabilities Identified
+# Root Cause
 
 ### Path Traversal / Arbitrary File Read
 
