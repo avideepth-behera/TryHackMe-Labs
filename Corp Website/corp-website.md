@@ -1,12 +1,14 @@
 # Corp Website
 
-**Platform:** TryHackMe | **Level:** Medium | **Category:** Boot2Root
+**Platform:** TryHackMe | **Level:** Medium | **Category:** Web
+
+Link: https://tryhackme.com/room/lafb2026e7
 
 ---
 
 ## 1. Reconnaissance
 
-The target was a React/Next.js web application running on port `3000`.
+The target is a React/Next.js web application running on port `3000`.
 
 ![website](image2.png)
 
