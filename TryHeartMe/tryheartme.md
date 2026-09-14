@@ -2,6 +2,8 @@
 
 Platform: TryHackMe | Level: Easy | Category: Web
 
+Link: https://tryhackme.com/room/lafb2026e5
+
 ---
 
 ## Reconnaissance
