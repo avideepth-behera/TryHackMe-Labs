@@ -2,19 +2,11 @@
 
 **Platform:** TryHackMe | **Difficulty:** Easy | **Category:** Web
 
----
-
-## 1. Overview
-
-**Hidden Deep Into My Heart** is an easy-level web challenge involving web enumeration, `robots.txt` discovery, hidden directories, information disclosure, and username brute-forcing.
-
-The application initially appeared to be a simple static webpage. However, enumeration revealed a hidden path through `robots.txt`. This path eventually led to an administrator login page.
-
-A password-like string was also exposed in `robots.txt`. Since the password was known but the username was not, Burp Suite Intruder was used to brute-force the username and gain access to the administrator panel.
+Link: https://tryhackme.com/room/lafb2026e9
 
 ---
 
-# 2. Reconnaissance
+# Reconnaissance
 
 ## Nmap Scan
 
@@ -33,7 +25,7 @@ So I moved to the web application.
 
 ---
 
-# 3. Web Application Enumeration
+# Web Application Enumeration
 
 The webpage appeared to be a simple static website.
 
@@ -45,7 +37,7 @@ Since the application did not reveal much through manual inspection, I proceeded
 
 ---
 
-# 4. Directory Enumeration
+# Directory Enumeration
 
 I used **FFUF** with the SecLists common wordlist:
 
@@ -59,7 +51,7 @@ Nothing interesting here as I was unable to access the `console` directory.
 
 ---
 
-# 5. robots.txt Enumeration
+# robots.txt Enumeration
 
 I accessed the `robots.txt` which contained:
 
@@ -83,7 +75,7 @@ In this case, the `robots.txt` file effectively disclosed the location of a hidd
 
 ---
 
-# 6. Enumerating the Hidden Directory
+# Enumerating the Hidden Directory
 
 Since the `robots.txt` file revealed:
 
@@ -103,7 +95,7 @@ This presented an another directory location.
 
 ---
 
-# 7. Administrator Login
+# Administrator Login
 
 I went to the directory and found out a login page.
 
@@ -119,7 +111,7 @@ Instead of guessing manually, I intercepted the login request using **Burp Suite
 
 ---
 
-# 8. Username Brute Force
+# Username Brute Force
 
 I configured Intruder for a **Sniper** attack.
 
@@ -142,7 +134,7 @@ So I used that username to login.
 
 ---
 
-# 9. Administrator Access
+# Administrator Access
 
 And the username was correct which logged me into the administrator panel.
 
@@ -152,45 +144,7 @@ The room flag was present there.
 
 ---
 
-# 10. Attack Chain
-
-```text
-Nmap Scan
-    ↓
-Web Application on Port 5000
-    ↓
-Static Webpage
-    ↓
-FFUF Directory Enumeration
-    ↓
-robots.txt
-    ↓
-Disallowed /cupids_secret_vault/*
-    ↓
-Password-like String Disclosed
-    ↓
-FFUF Enumeration of /cupids_secret_vault/
-    ↓
-/administrator
-    ↓
-Administrator Login Page
-    ↓
-Known Password + Unknown Username
-    ↓
-Burp Suite Intruder
-    ↓
-Username Brute Force
-    ↓
-Valid Username Discovered
-    ↓
-Administrator Login
-    ↓
-Room Flag
-```
-
----
-
-# 11. Vulnerabilities Identified
+# Root Cause
 
 The challenge demonstrates several weaknesses working together.
 
@@ -206,7 +160,7 @@ The challenge demonstrates several weaknesses working together.
 
 ---
 
-# 12. Security Impact
+# Security Impact
 
 The vulnerabilities can be chained together to obtain unauthorized administrative access.
 
@@ -240,7 +194,7 @@ Depending on what the administrator panel controls, this could lead to:
 
 ---
 
-# 13. Mitigations
+# Mitigations
 
 1. Sensitive Information Disclosure : Sensitive credentials passwords, API keys, tokens, or other secrets should never be stored in publicly accessible files like `robots.txt`.
 
@@ -269,19 +223,7 @@ Depending on what the administrator panel controls, this could lead to:
 
 ---
 
-# 14. Tools Used
-
-| Tool          | Purpose                                    |
-| ------------- | ------------------------------------------ |
-| Nmap          | Port and service enumeration               |
-| FFUF          | Directory/content enumeration              |
-| Burp Suite    | HTTP request interception and manipulation |
-| Burp Intruder | Username brute-force testing               |
-| Browser       | Manual web application enumeration         |
-
----
-
-# 15. Key Takeaways
+# Key Takeaways
 
 This room demonstrates why apparently minor information disclosures can become serious when chained together.
 
@@ -297,7 +239,7 @@ The most important lessons were:
 
 ---
 
-# 16. Conclusion
+# Conclusion
 
 The challenge initially presented a seemingly static webpage with very little functionality.
 
